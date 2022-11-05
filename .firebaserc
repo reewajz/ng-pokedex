@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angcrud-56829": {
+      "hosting": {
+        "ngPokedex": [
+          "angcrud-56829"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angcrud-56829"
+  }
+}
