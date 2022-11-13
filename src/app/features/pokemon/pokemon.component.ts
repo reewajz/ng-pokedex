@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { filter, Observable, tap } from 'rxjs';
 import { PokedexFirestoreService } from 'src/app/core/services/pokedex-firestore.service';
 import { Pokemon } from '../interfaces/Pokemon';
+import { FormComponent } from './components/form/form.component';
 
 @Component({
   selector: 'app-pokemon',
@@ -18,6 +19,25 @@ export class PokemonComponent implements OnInit {
 
   ngOnInit(): void {
     this.pokemon$ = this.pokedexFirestoreService.getAll();
+  }
+
+  addPokemon() {
+    const dialogRef = this.matDialog.open(FormComponent,
+      {
+        data: {},
+        width: '40%'
+      }
+    );
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter(Boolean),
+        tap((pokemon) => this.pokedexFirestoreService.create(pokemon))
+      )
+      .subscribe();
+
+
+
   }
 
 }
