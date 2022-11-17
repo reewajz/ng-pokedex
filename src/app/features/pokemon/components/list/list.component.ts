@@ -8,7 +8,7 @@ import { Pokemon } from 'src/app/features/interfaces/Pokemon';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  @Input() pokemon$!: Observable<Pokemon[]>;
+  @Input() inputPokemon$!: Observable<Pokemon[]>;
   @Output() pokemonEmitter = new EventEmitter<Pokemon>();
 
   constructor() { }
