@@ -38,7 +38,7 @@ export class PokemonComponent implements OnInit {
       .pipe(
         filter(Boolean),
         tap((pokemon) => this.pokedexFirestoreService.create(pokemon)),
-        takeUntil(this.)
+        takeUntil(this.destroyed$)
       )
       .subscribe();
   }
@@ -53,7 +53,8 @@ export class PokemonComponent implements OnInit {
     dialogRef.afterClosed().pipe(
       filter(Boolean),
       tap((pokemon: Pokemon) => this.pokedexFirestoreService.update(pokemon)),
-      tap((pokemon: Pokemon) => this.selectPokemon(pokemon))
+      tap((pokemon: Pokemon) => this.selectPokemon(pokemon)),
+      takeUntil(this.destroyed$)
     ).subscribe();
   }
 
